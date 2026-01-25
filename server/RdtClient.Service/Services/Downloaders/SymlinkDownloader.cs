@@ -229,6 +229,13 @@ public class SymlinkDownloader(String uri, String destinationPath, String path, 
     {
         try
         {
+            // If the symlink already exists, consider it a success
+            if (File.Exists(symlinkPath))
+            {
+                _logger.Information($"Symbolic link already exists at {symlinkPath}");
+                return true;
+            }
+
             File.CreateSymbolicLink(symlinkPath, sourcePath);
 
             if (File.Exists(symlinkPath)) // Double-check that the link was created
