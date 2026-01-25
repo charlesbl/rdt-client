@@ -38,7 +38,17 @@ public static class DownloadHelper
             {
                 subPath = subPath.Trim('/').Trim('\\');
 
-                torrentPath = Path.Combine(torrentPath, subPath);
+                // Check if subPath already starts with RdName to avoid duplication
+                if (subPath.StartsWith(directory + Path.DirectorySeparatorChar) ||
+                    subPath.StartsWith(directory + "/") ||
+                    subPath.StartsWith(directory + "\\"))
+                {
+                    torrentPath = Path.Combine(downloadPath, subPath);
+                }
+                else
+                {
+                    torrentPath = Path.Combine(torrentPath, subPath);
+                }
             }
         }
 
@@ -87,7 +97,18 @@ public static class DownloadHelper
             {
                 subPath = subPath.Trim('/').Trim('\\');
 
-                torrentPath = Path.Combine(torrentPath, subPath);
+                // Check if subPath already starts with RdName to avoid duplication
+                var directory = RemoveInvalidPathChars(torrent.RdName);
+                if (subPath.StartsWith(directory + Path.DirectorySeparatorChar) ||
+                    subPath.StartsWith(directory + "/") ||
+                    subPath.StartsWith(directory + "\\"))
+                {
+                    torrentPath = subPath;
+                }
+                else
+                {
+                    torrentPath = Path.Combine(torrentPath, subPath);
+                }
             }
         }
 

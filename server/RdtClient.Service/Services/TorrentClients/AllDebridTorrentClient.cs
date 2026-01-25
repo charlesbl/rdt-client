@@ -359,6 +359,16 @@ public class AllDebridTorrentClient(ILogger<AllDebridTorrentClient> logger, IAll
             return matchingTorrentFiles[0].Path;
         }
 
-        return Path.Combine(directory, matchingTorrentFiles[0].Path);
+        var filePath = matchingTorrentFiles[0].Path;
+
+        // Check if file.Path already starts with RdName to avoid duplication
+        if (filePath.StartsWith(directory + Path.DirectorySeparatorChar) ||
+            filePath.StartsWith(directory + "/") ||
+            filePath.StartsWith(directory + "\\"))
+        {
+            return filePath;
+        }
+
+        return Path.Combine(directory, filePath);
     }
 }
