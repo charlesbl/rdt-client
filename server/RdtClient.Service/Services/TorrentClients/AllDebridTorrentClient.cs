@@ -362,7 +362,8 @@ public class AllDebridTorrentClient(ILogger<AllDebridTorrentClient> logger, IAll
         var filePath = matchingTorrentFiles[0].Path;
 
         // Check if file.Path already starts with RdName to avoid duplication
-        if (filePath.StartsWith(directory + Path.DirectorySeparatorChar) ||
+        if (filePath == directory ||
+            filePath.StartsWith(directory + Path.DirectorySeparatorChar) ||
             filePath.StartsWith(directory + "/") ||
             filePath.StartsWith(directory + "\\"))
         {

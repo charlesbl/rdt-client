@@ -39,7 +39,8 @@ public static class DownloadHelper
                 subPath = subPath.Trim('/').Trim('\\');
 
                 // Check if subPath already starts with RdName to avoid duplication
-                if (subPath.StartsWith(directory + Path.DirectorySeparatorChar) ||
+                if (subPath == directory ||
+                    subPath.StartsWith(directory + Path.DirectorySeparatorChar) ||
                     subPath.StartsWith(directory + "/") ||
                     subPath.StartsWith(directory + "\\"))
                 {
@@ -99,7 +100,8 @@ public static class DownloadHelper
 
                 // Check if subPath already starts with RdName to avoid duplication
                 var directory = RemoveInvalidPathChars(torrent.RdName);
-                if (subPath.StartsWith(directory + Path.DirectorySeparatorChar) ||
+                if (subPath == directory ||
+                    subPath.StartsWith(directory + Path.DirectorySeparatorChar) ||
                     subPath.StartsWith(directory + "/") ||
                     subPath.StartsWith(directory + "\\"))
                 {
