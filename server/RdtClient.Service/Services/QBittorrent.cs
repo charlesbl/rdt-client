@@ -230,7 +230,7 @@ public class QBittorrent(ILogger<QBittorrent> logger, Settings settings, Authent
                 var dlBytesDone = torrent.Downloads.Sum(m => m.BytesDone);
                 var dlBytesTotal = torrent.Downloads.Sum(m => m.BytesTotal);
                 speed = (Int32)torrent.Downloads.Average(m => m.Speed);
-                downloadProgress = bytesTotal > 0 ? Math.Clamp((Double)dlBytesDone / dlBytesTotal, 0.0, 1.0) : 0;
+                downloadProgress = dlBytesTotal > 0 ? Math.Clamp((Double)dlBytesDone / dlBytesTotal, 0.0, 1.0) : 0;
             }
 
             var progress = (rdProgress + downloadProgress) / 2.0;
